@@ -39,4 +39,10 @@ public class WheelSpinResolverTests
         var resolver = new WheelSpinResolver(new FakeRandomProvider(fixedIndex: 0));
         Assert.Throws<System.ArgumentException>(() => resolver.Resolve(new List<WheelSliceData>()));
     }
+
+    [Test]
+    public void RequiredSliceCount_Is8()
+    {
+        Assert.AreEqual(8, WheelConfigSO.RequiredSliceCount);
+    }
 }

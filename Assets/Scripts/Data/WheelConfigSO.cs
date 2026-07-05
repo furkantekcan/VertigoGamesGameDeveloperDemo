@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WheelConfig_", menuName = "Wheel/Wheel Config")]
 public class WheelConfigSO : ScriptableObject
 {
+    public const int RequiredSliceCount = 8;
+    
     [Tooltip("Normal zonlarda kullanılan slice dizilimi (bomba dahil)")]
     public List<WheelSliceData> normalSlices = new();
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardId: Cash
   icon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
-  baseValue: 0
+  baseValue: 200
   valueGrowthCurve:
     serializedVersion: 2
     m_Curve:

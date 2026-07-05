@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardId: Gold
   icon: {fileID: 21300000, guid: da9a6cd7d1005434a8d446a2bd10c3ce, type: 3}
-  baseValue: 0
+  baseValue: 10
   valueGrowthCurve:
     serializedVersion: 2
     m_Curve:

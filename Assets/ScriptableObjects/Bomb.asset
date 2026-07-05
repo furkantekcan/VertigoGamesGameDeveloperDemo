@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardId: Bomb
   icon: {fileID: 21300000, guid: 49de4e87f94aec64dadcadf2e240b0a5, type: 3}
-  baseValue: 0
+  baseValue: 10
   valueGrowthCurve:
     serializedVersion: 2
     m_Curve:

@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     public event Action<SpinResult> OnSpinResolved;
     public event Action OnGameOver;
 
+    [SerializeField] private WheelView wheelView;
+
     private void Awake()
     {
         _zoneService = new ZoneProgressionService();
@@ -37,28 +39,33 @@ public class GameController : MonoBehaviour
         _currentZone = _zoneService.GetZoneInfo(1);
         _stateMachine.Restart();
         OnZoneChanged?.Invoke(_currentZone);
+
+        RefreshWheelVisual();
     }
 
     public bool CanSpin() => _stateMachine.CanSpin();
     public bool CanLeave() => _stateMachine.CanLeave(_currentZone);
 
     public void Spin()
+{
+    if (!CanSpin())
     {
-        if (!CanSpin())
-        {
-            Debug.LogWarning("Spin requested but not allowed in current state.");
-            return;
-        }
-
-        _stateMachine.RequestSpin();
-
-        var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
-        SpinResult result = _spinResolver.Resolve(slices);
-
-        //  ResolveSpinComplete will be called after DOTween finshed
-        
-        ResolveSpinComplete(result);
+        Debug.LogWarning("Spin requested but not allowed in current state.");
+        return;
     }
+
+    _stateMachine.RequestSpin();
+
+    var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
+    SpinResult result = _spinResolver.Resolve(slices);
+
+    wheelView.PlaySpinAnimation(result.SliceIndex, slices.Count, () =>
+    {
+        ResolveSpinComplete(result);
+    });
+}
+
+    
 
     private void ResolveSpinComplete(SpinResult result)
     {
@@ -86,6 +93,8 @@ public class GameController : MonoBehaviour
         _currentZone = _zoneService.Advance();
         _stateMachine.ContinueToNextZone();
         OnZoneChanged?.Invoke(_currentZone);
+
+        RefreshWheelVisual();
     }
 
     public void Leave()
@@ -99,6 +108,13 @@ public class GameController : MonoBehaviour
         _stateMachine.RequestLeave();
         OnGameOver?.Invoke();
     }
+
+    private void RefreshWheelVisual()
+{
+    var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
+    wheelView.BuildSlices(slices);
+    wheelView.SetZoneIndexText(_currentZone.ZoneIndex);
+}
 
     public IReadOnlyList<CollectedReward> GetCollectedRewards() => _rewardService.CollectedRewards;
     public int GetTotalValue() => _rewardService.TotalValue;
