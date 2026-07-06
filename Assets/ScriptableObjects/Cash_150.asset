@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e3620d71e3da044e9001d69f31f1c92, type: 3}
-  m_Name: Chest_Bronze
+  m_Name: Cash_150
   m_EditorClassIdentifier: 
-  rewardId: Chest_Bronze
-  icon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
-  baseValue: 0
+  rewardId: Cash
+  icon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
+  baseValue: 150
   valueGrowthCurve:
     serializedVersion: 2
     m_Curve:

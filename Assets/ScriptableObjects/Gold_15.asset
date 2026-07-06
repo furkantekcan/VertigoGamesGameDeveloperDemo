@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e3620d71e3da044e9001d69f31f1c92, type: 3}
-  m_Name: Bomb
+  m_Name: Gold_15
   m_EditorClassIdentifier: 
-  rewardId: Bomb
-  icon: {fileID: 21300000, guid: 49de4e87f94aec64dadcadf2e240b0a5, type: 3}
-  baseValue: 0
+  rewardId: Gold
+  icon: {fileID: 21300000, guid: da9a6cd7d1005434a8d446a2bd10c3ce, type: 3}
+  baseValue: 15
   valueGrowthCurve:
     serializedVersion: 2
     m_Curve:

@@ -16,9 +16,11 @@ public class GameController : MonoBehaviour
 
     public event Action<ZoneInfo> OnZoneChanged;
     public event Action<SpinResult> OnSpinResolved;
-    public event Action OnGameOver;
+    public event Action<GameOutcome> OnRunEnded;
 
     [SerializeField] private WheelView wheelView;
+
+    [SerializeField] private HudView hudView;
 
     private void Awake()
     {
@@ -30,7 +32,24 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        hudView.OnSpinClicked += Spin;
+        hudView.OnLeaveClicked += Leave;
+        hudView.OnContinueClicked += ContinueToNextZone;
+        hudView.OnRestartClicked += StartNewRun;
+
+        OnRunEnded += outcome => hudView.ShowResultPanel(outcome, _rewardService.TotalValue);
+
         StartNewRun();
+    }
+
+    private void OnDestroy()
+    {
+        hudView.OnSpinClicked -= Spin;
+        hudView.OnLeaveClicked -= Leave;
+        hudView.OnContinueClicked -= ContinueToNextZone;
+        hudView.OnRestartClicked -= StartNewRun;
+
+        OnRunEnded -= outcome => hudView.ShowResultPanel(outcome, _rewardService.TotalValue);
     }
 
     public void StartNewRun()
@@ -38,34 +57,34 @@ public class GameController : MonoBehaviour
         _rewardService.ClearAll();
         _currentZone = _zoneService.GetZoneInfo(1);
         _stateMachine.Restart();
-        OnZoneChanged?.Invoke(_currentZone);
-
         RefreshWheelVisual();
+        RefreshHud();
+        OnZoneChanged?.Invoke(_currentZone);
     }
 
     public bool CanSpin() => _stateMachine.CanSpin();
     public bool CanLeave() => _stateMachine.CanLeave(_currentZone);
 
     public void Spin()
-{
-    if (!CanSpin())
     {
-        Debug.LogWarning("Spin requested but not allowed in current state.");
-        return;
+        if (!CanSpin())
+        {
+            Debug.LogWarning("Spin requested but not allowed in current state.");
+            return;
+        }
+
+        _stateMachine.RequestSpin();
+
+        var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
+        SpinResult result = _spinResolver.Resolve(slices);
+
+        wheelView.PlaySpinAnimation(result.SliceIndex, slices.Count, () =>
+        {
+            ResolveSpinComplete(result);
+        });
     }
 
-    _stateMachine.RequestSpin();
 
-    var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
-    SpinResult result = _spinResolver.Resolve(slices);
-
-    wheelView.PlaySpinAnimation(result.SliceIndex, slices.Count, () =>
-    {
-        ResolveSpinComplete(result);
-    });
-}
-
-    
 
     private void ResolveSpinComplete(SpinResult result)
     {
@@ -75,11 +94,13 @@ public class GameController : MonoBehaviour
         if (result.IsBomb)
         {
             _rewardService.ClearAll();
-            OnGameOver?.Invoke();
+            OnRunEnded?.Invoke(GameOutcome.BombHit);
+            RefreshHud();
             return;
         }
 
         _rewardService.AddReward(result.Slice.reward, _currentZone.ZoneIndex);
+        RefreshHud();
     }
 
     public void ContinueToNextZone()
@@ -92,9 +113,9 @@ public class GameController : MonoBehaviour
 
         _currentZone = _zoneService.Advance();
         _stateMachine.ContinueToNextZone();
-        OnZoneChanged?.Invoke(_currentZone);
-
         RefreshWheelVisual();
+        RefreshHud();
+        OnZoneChanged?.Invoke(_currentZone);
     }
 
     public void Leave()
@@ -106,15 +127,36 @@ public class GameController : MonoBehaviour
         }
 
         _stateMachine.RequestLeave();
-        OnGameOver?.Invoke();
+        OnRunEnded?.Invoke(GameOutcome.CashedOut);
+        RefreshHud();
     }
 
     private void RefreshWheelVisual()
-{
-    var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
-    wheelView.BuildSlices(slices);
-    wheelView.SetZoneIndexText(_currentZone.ZoneIndex);
-}
+    {
+        var slices = wheelConfig.GetSlicesForZoneType(_currentZone.Type);
+        wheelView.BuildSlices(slices);
+        wheelView.SetZoneIndexText(_currentZone.ZoneIndex);
+    }
+
+    private void RefreshHud()
+    {
+        hudView.SetZoneIndex(_currentZone.ZoneIndex);
+        hudView.SetTotalValue(_rewardService.TotalValue);
+
+        bool isSpinning = _stateMachine.CurrentState == GameState.Spinning;
+        bool canSpin = CanSpin();
+        bool canLeave = CanLeave();
+        bool isResultResolved = _stateMachine.CurrentState == GameState.ResultResolved;
+        bool isGameOver = _stateMachine.CurrentState == GameState.GameOver;
+
+        hudView.SetSpinInteractable(!isSpinning && canSpin);
+        hudView.SetLeaveInteractable(!isSpinning && canLeave);
+        hudView.SetContinueInteractable(!isSpinning && isResultResolved);
+
+        hudView.ShowContinueButton(isResultResolved);
+        hudView.ShowSpinButton(!isResultResolved && !isGameOver);
+        hudView.ShowGameOverPanel(isGameOver);
+    }
 
     public IReadOnlyList<CollectedReward> GetCollectedRewards() => _rewardService.CollectedRewards;
     public int GetTotalValue() => _rewardService.TotalValue;

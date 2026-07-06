@@ -5,8 +5,8 @@ using TMPro;
 public class SliceView : UIComponentBase
 {
     [Header("Auto-Bound References")]
-    [SerializeField] private Image iconImage;         
-    [SerializeField] private TextMeshProUGUI amountText;         
+    [SerializeField] private Image iconImage;
+    [SerializeField] private TextMeshProUGUI amountText;
 
     public void Configure(WheelSliceData data, int zoneIndex)
     {
@@ -22,15 +22,15 @@ public class SliceView : UIComponentBase
 
     protected override void AutoBindReferences()
     {
-        
+
     }
 
     private void ConfigureAsBomb(WheelSliceData data)
     {
         if (iconImage != null)
         {
-            iconImage.sprite = data.sliceIcon;
-            iconImage.gameObject.SetActive(data.sliceIcon != null);
+            iconImage.sprite = data.reward.icon;
+            iconImage.gameObject.SetActive(data.reward.icon != null);
         }
 
         if (amountText != null)
@@ -41,7 +41,7 @@ public class SliceView : UIComponentBase
     {
         if (iconImage != null)
         {
-            Sprite sprite = data.sliceIcon != null ? data.sliceIcon : data.reward?.icon;
+            Sprite sprite = data.reward.icon != null ? data.reward.icon : data.reward?.icon;
             iconImage.sprite = sprite;
             iconImage.gameObject.SetActive(sprite != null);
         }
@@ -49,7 +49,8 @@ public class SliceView : UIComponentBase
         if (amountText != null && data.reward != null)
         {
             amountText.gameObject.SetActive(true);
-            amountText.text = data.reward.GetValueForZone(zoneIndex).ToString();
+            int value = data.reward.GetValueForZone(zoneIndex);
+            amountText.text = $"x{value}";
         }
     }
 }

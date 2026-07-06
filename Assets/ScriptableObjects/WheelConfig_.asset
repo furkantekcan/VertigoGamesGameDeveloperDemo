@@ -15,60 +15,51 @@ MonoBehaviour:
   normalSlices:
   - sliceType: 1
     reward: {fileID: 11400000, guid: b0348cae3e66a5240978b1fc83063127, type: 2}
-    sliceIcon: {fileID: 21300000, guid: 49de4e87f94aec64dadcadf2e240b0a5, type: 3}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: 844d00957825d6a4dbab0e9b335aa86b, type: 2}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: 6b70806e96b36234088b1bf7a4bdd679, type: 2}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 4250307ed801bb340849f32c20c6779b, type: 2}
-    sliceIcon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 4250307ed801bb340849f32c20c6779b, type: 2}
-    sliceIcon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 4250307ed801bb340849f32c20c6779b, type: 2}
-    sliceIcon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
+    reward: {fileID: 11400000, guid: d477c269ec068984badaa31cc7ba218d, type: 2}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 4250307ed801bb340849f32c20c6779b, type: 2}
-    sliceIcon: {fileID: 21300000, guid: a08095e6d2968b846a202116765fa612, type: 3}
+    reward: {fileID: 11400000, guid: e79044be24917b64abc28a8b86975282, type: 2}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: d8baf4738cd520144abf46f4d44b203a, type: 2}
   safeSlices:
   - sliceType: 0
+    reward: {fileID: 11400000, guid: 0fd7ba8ccdd5c28498feb07f32bbaac4, type: 2}
+  - sliceType: 0
     reward: {fileID: 11400000, guid: 4f85a0f4b6c2f4e4295ff793b879650a, type: 2}
-    sliceIcon: {fileID: 21300000, guid: 914ca9540298a804396133b55d4a4bbb, type: 3}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: 4f0b01d3f3c00764895e6d80b8d26927, type: 2}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
+    reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
+    reward: {fileID: 11400000, guid: eebae2c9a5962f342b919b29350cabfa, type: 2}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
+    reward: {fileID: 11400000, guid: d9a09ce368174cb4286bfb797751d180, type: 2}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
-  - sliceType: 0
-    reward: {fileID: 11400000, guid: 2fd4a75fea908384ea43ab78bac4035d, type: 2}
-    sliceIcon: {fileID: 21300000, guid: d41c093a684c6c8468b988ee7aa9081d, type: 3}
+    reward: {fileID: 11400000, guid: 485ae940d3fa2604dabce9eb4e432b6f, type: 2}
   superSlices:
   - sliceType: 0
     reward: {fileID: 11400000, guid: 485ae940d3fa2604dabce9eb4e432b6f, type: 2}
-    sliceIcon: {fileID: 21300000, guid: c5af0463932c0cd40a95982d83aafe95, type: 3}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: 1b7307af52e64eb4081221ea6823a2c0, type: 2}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: d477c269ec068984badaa31cc7ba218d, type: 2}
+  - sliceType: 0
+    reward: {fileID: 11400000, guid: eebae2c9a5962f342b919b29350cabfa, type: 2}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
   - sliceType: 0
     reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
   - sliceType: 0
-    reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
-  - sliceType: 0
-    reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
-  - sliceType: 0
-    reward: {fileID: 11400000, guid: 2d2a33c0ce2a37b4c814e49e959e42a7, type: 2}
-    sliceIcon: {fileID: 21300000, guid: ca1613f90ddf4354c84c543866511580, type: 3}
+    reward: {fileID: 11400000, guid: 4250307ed801bb340849f32c20c6779b, type: 2}
